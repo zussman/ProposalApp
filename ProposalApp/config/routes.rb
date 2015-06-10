@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   devise_for :users
   get 'welcome/index'
 
-  resources :phonetypes, :emails
+  resources :phone_types, :emails
 
   root 'welcome#index'
 

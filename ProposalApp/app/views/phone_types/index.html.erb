@@ -1,0 +1,15 @@
+<div class="row">
+  <div class="col-md-4">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h1 class="panel-title">Phone Types</h1>
+        <%= link_to "+", new_phone_type_path, :class => 'btn btn-primary pull-right' %>
+      </div>
+      <div class="panel-body">
+        <% @phone_types.each do |phone_type| %>
+          <p><%= link_to "#{phone_type.name}", edit_phone_type_path(phone_type) %></p>
+        <% end %>
+      </div>
+    </div>    
+  </div>
+</div>

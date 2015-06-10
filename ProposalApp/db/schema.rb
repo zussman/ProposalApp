@@ -11,13 +11,49 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150609143138) do
+ActiveRecord::Schema.define(version: 20150610222931) do
 
   create_table "emails", force: :cascade do |t|
     t.string   "email_address"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
   end
+
+  create_table "people", force: :cascade do |t|
+    t.string   "first_name"
+    t.string   "last_name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "person_emails", force: :cascade do |t|
+    t.integer  "person_id"
+    t.integer  "email_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "person_emails", ["email_id"], name: "index_person_emails_on_email_id"
+  add_index "person_emails", ["person_id"], name: "index_person_emails_on_person_id"
+
+  create_table "person_phone_numbers", force: :cascade do |t|
+    t.integer  "phone_number_id"
+    t.integer  "person_id"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+  end
+
+  add_index "person_phone_numbers", ["person_id"], name: "index_person_phone_numbers_on_person_id"
+  add_index "person_phone_numbers", ["phone_number_id"], name: "index_person_phone_numbers_on_phone_number_id"
+
+  create_table "phone_numbers", force: :cascade do |t|
+    t.string   "phone_number"
+    t.integer  "phone_type_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
+
+  add_index "phone_numbers", ["phone_type_id"], name: "index_phone_numbers_on_phone_type_id"
 
   create_table "phone_types", force: :cascade do |t|
     t.string   "name"

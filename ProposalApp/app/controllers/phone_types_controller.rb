@@ -19,7 +19,7 @@ class PhoneTypesController < ApplicationController
 		@phone_type = PhoneType.new phone_type_params
 
 		if @phone_type.save
-			redirect_to @phone_type
+			redirect_to action: 'index'
 		else
 			render 'new'
 		end

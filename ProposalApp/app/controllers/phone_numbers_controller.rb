@@ -9,6 +9,7 @@ class PhoneNumbersController < ApplicationController
 
   def new
     @phone_number = PhoneNumber.new
+    @phone_number.phone_type.new
   end
 
   def edit
@@ -16,7 +17,7 @@ class PhoneNumbersController < ApplicationController
   end
 
   def create
-    @phone_number = PhoneNumber.new phone_number_params
+    @phone_number = PhoneNumber.new(phone_number_params)
 
     if @phone_number.save
       redirect_to action: 'index'
@@ -37,6 +38,6 @@ class PhoneNumbersController < ApplicationController
 
   private
     def phone_number_params
-      params.require(:phone_number).permit(:phone_number)
+      params.require(:phone_number).permit(:phone_number, phone_types: [:name])
     end
 end

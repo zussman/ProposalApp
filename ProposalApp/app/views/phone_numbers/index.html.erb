@@ -1,0 +1,7 @@
+<h1>Phone Numbers</h1>
+<ul>
+  <% @phone_numbers.each do |number| %>
+    <li><%= number.phone_number %></li>
+  <% end %>
+</ul>
+<%= link_to "Add New Phone Number", new_phone_number_path, :class => 'btn btn-primary' %>

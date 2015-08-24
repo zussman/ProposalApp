@@ -6,6 +6,7 @@ class PeopleController < ApplicationController
 
   def show
     @person = Person.find(params[:id])
+  end
 
   def new
     @person = Person.new
@@ -19,7 +20,7 @@ class PeopleController < ApplicationController
     @person = Person.new person_params
 
     if @person.save
-      redirect_to @person
+      redirect_to action: 'index'
     else
       render 'new'
     end
@@ -35,9 +36,15 @@ class PeopleController < ApplicationController
     end
   end
 
+  def destroy
+    @person = Person.find(params[:id])
+    @person.destroy
+    redirect_to action: :index
+  end
+
   private
     def person_params
-      params.require(:person).permit(:first_name, :last_name)
+      params.require(:person).permit(:first_name, :last_name, person_phone_number_attributes: [:id, :_destroy, phone_number: [:id, :phone_number]], person_email_attributes: [:id, :email_address, :_destroy, email: [:id, :email_address]])
     end
-  end
+    
 end

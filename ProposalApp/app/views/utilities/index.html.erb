@@ -1,0 +1,12 @@
+<h1>Utilities</h1>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h1 class="panel-title">Utilities</h1>
+  </div>
+  <div class="panel-body">
+    <% @utilities.each do |utility| %>
+      <p><%= link_to "#{utility.name}", edit_utility_path(utility) %></p>
+    <% end %>
+    <%= link_to "Add New Utility", new_utility_path, :class => 'btn btn-primary' %>
+  </div>
+</div>

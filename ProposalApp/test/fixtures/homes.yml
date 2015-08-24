@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  utilities_id: 
+  people_id: 
+  addresses_id: 
+
+two:
+  utilities_id: 
+  people_id: 
+  addresses_id: 

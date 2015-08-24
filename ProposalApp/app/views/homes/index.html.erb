@@ -1,0 +1,27 @@
+<div class="page-header">
+  <h2>Homes</h2>
+</div>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Address</th>
+      <th>State</th>
+      <th>City</th>
+      <th>Zip</th>
+      <th>Date Modified</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @homes.each do |home| %>
+      <tr>
+        <td>Home Address</td>
+        <td>Home State</td>
+        <td>Home City</td>
+        <td>Home Zip</td>
+        <td><%= "#{home.updated_at}" %> <%= link_to 'Delete', home, method: :delete %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to "Add home", new_home_path, :class => 'btn btn-primary' %>

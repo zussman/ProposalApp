@@ -1,0 +1,8 @@
+<%= simple_nested_form_for @home do |f| %>
+  <div class="input-group">
+    <%= f.fields_for :utilities do |utility| %>
+      <%= utility.collection_select(:id, Utility.all, :id, :name) %>
+    <% end %>
+    <%= f.button :submit %>
+  </div>
+<% end %>

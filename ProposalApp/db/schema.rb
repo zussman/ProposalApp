@@ -11,7 +11,40 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150610222931) do
+ActiveRecord::Schema.define(version: 20150821202843) do
+
+  create_table "accounts", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "phone_numbers_id"
+    t.integer  "addresses_id"
+    t.integer  "emails_id"
+    t.integer  "people_id"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+  end
+
+  add_index "accounts", ["addresses_id"], name: "index_accounts_on_addresses_id"
+  add_index "accounts", ["emails_id"], name: "index_accounts_on_emails_id"
+  add_index "accounts", ["people_id"], name: "index_accounts_on_people_id"
+  add_index "accounts", ["phone_numbers_id"], name: "index_accounts_on_phone_numbers_id"
+
+  create_table "addresses", force: :cascade do |t|
+    t.string   "address_line_1"
+    t.string   "address_line_2"
+    t.integer  "city_id"
+    t.integer  "state_id"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
+
+  add_index "addresses", ["city_id"], name: "index_addresses_on_city_id"
+  add_index "addresses", ["state_id"], name: "index_addresses_on_state_id"
+
+  create_table "cities", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "emails", force: :cascade do |t|
     t.string   "email_address"
@@ -19,12 +52,29 @@ ActiveRecord::Schema.define(version: 20150610222931) do
     t.datetime "updated_at",    null: false
   end
 
+  create_table "homes", force: :cascade do |t|
+    t.integer  "people_id"
+    t.integer  "addresses_id"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.integer  "utility_id"
+  end
+
+  add_index "homes", ["addresses_id"], name: "index_homes_on_addresses_id"
+  add_index "homes", ["people_id"], name: "index_homes_on_people_id"
+  add_index "homes", ["utility_id"], name: "index_homes_on_utility_id"
+
   create_table "people", force: :cascade do |t|
     t.string   "first_name"
     t.string   "last_name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+    t.integer  "home_id"
+    t.integer  "person_phone_number_id"
   end
+
+  add_index "people", ["home_id"], name: "index_people_on_home_id"
+  add_index "people", ["person_phone_number_id"], name: "index_people_on_person_phone_number_id"
 
   create_table "person_emails", force: :cascade do |t|
     t.integer  "person_id"
@@ -61,6 +111,39 @@ ActiveRecord::Schema.define(version: 20150610222931) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "product_categories", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "products", force: :cascade do |t|
+    t.string   "name"
+    t.string   "description"
+    t.string   "color"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  create_table "service_categories", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "services", force: :cascade do |t|
+    t.string   "name"
+    t.string   "description"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  create_table "states", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
     t.string   "encrypted_password",     default: "", null: false
@@ -78,5 +161,11 @@ ActiveRecord::Schema.define(version: 20150610222931) do
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+
+  create_table "utilities", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
 end

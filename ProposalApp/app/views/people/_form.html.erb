@@ -1,0 +1,12 @@
+<%= simple_nested_form_for @person do |f| %>
+  <%= f.input :first_name %>
+  <%= f.input :last_name %>
+  <%= f.fields_for :phone_numbers do |number| %>
+    <%= number.input :phone_number %>
+    <%= number.link_to_remove "-" %>
+  <% end %>
+  <%= f.fields_for :emails do |email| %>
+    <%= email.input :email_address %>
+  <% end %>
+  <%= f.submit class: "btn btn-primary" %>
+<% end %>

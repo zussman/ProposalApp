@@ -1,5 +1,5 @@
 class PhoneTypesController < ApplicationController
-	def index
+		def index
 		@phone_types = PhoneType.all
 	end
 
@@ -33,6 +33,12 @@ class PhoneTypesController < ApplicationController
 		else
 		  render 'edit'
 		end
+	end
+
+	def destroy
+		@phone_type = PhoneType.find(params[:id])
+		@phone_type.destroy
+		redirect_to action: :index
 	end
 
 	private
